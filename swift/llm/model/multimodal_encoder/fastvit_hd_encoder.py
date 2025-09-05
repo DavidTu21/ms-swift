@@ -1,5 +1,5 @@
 # Copyright (c) Alibaba, Inc. and its affiliates.
-"""FastViTHD Vision Encoder for Louis model"""
+"""FastViTHD Vision Encoder for FastVLM model"""
 
 import os
 from typing import Optional, Union, List

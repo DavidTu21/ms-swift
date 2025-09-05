@@ -60,7 +60,7 @@ class MLLMModelArch:
 
     phi3_vision = 'phi3_vision'
     phi4_multimodal = 'phi4_multimodal'
-    louis = 'louis'
+    fastvlm = 'fastvlm'
     florence = 'florence'
     idefics3 = 'idefics3'
 
@@ -615,7 +615,7 @@ register_model_arch(
 
 register_model_arch(
     MultiModelKeys(
-        MLLMModelArch.louis,
+        MLLMModelArch.fastvlm,
         language_model='model.layers',
         aligner='model.multi_modal_projector',
         vision_tower='model.vision_tower',

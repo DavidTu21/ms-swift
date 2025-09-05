@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """
-Louis Model Usage Example
+FastVLM Model Usage Example
 ========================
 
-This script demonstrates how to use the Louis model (FastViTHD + Phi4) 
+This script demonstrates how to use the FastVLM model (FastViTHD + Phi4) 
 for image and video understanding tasks.
 
 Requirements:
-- ms-swift with Louis model implementation
+- ms-swift with FastVLM model implementation
 - transformers >= 4.36
 - torch
 - PIL (for image processing)
 
 Usage:
-    python examples/louis_example.py --image_path /path/to/image.jpg
-    python examples/louis_example.py --video_path /path/to/video.mp4
+    python examples/fastvlm_example.py --image_path /path/to/image.jpg
+    python examples/fastvlm_example.py --video_path /path/to/video.mp4
 """
 
 import argparse
@@ -26,9 +26,9 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-def test_louis_constants():
-    """Test that Louis constants are properly defined"""
-    print("🔍 Testing Louis model constants...")
+def test_fastvlm_constants():
+    """Test that FastVLM constants are properly defined"""
+    print("🔍 Testing FastVLM model constants...")
     
     try:
         # Test model constants with proper context
@@ -40,8 +40,8 @@ def test_louis_constants():
             exec(content, constants_context)
         
         MLLMModelType = constants_context['MLLMModelType']
-        assert hasattr(MLLMModelType, 'louis'), "Louis model type not found"
-        print(f"✅ Louis model type: {MLLMModelType.louis}")
+        assert hasattr(MLLMModelType, 'fastvlm'), "FastVLM model type not found"
+        print(f"✅ FastVLM model type: {MLLMModelType.fastvlm}")
         
         # Test template constants
         template_context = {}
@@ -52,10 +52,10 @@ def test_louis_constants():
             exec(content, template_context)
             
         MLLMTemplateType = template_context['MLLMTemplateType']
-        assert hasattr(MLLMTemplateType, 'louis'), "Louis template type not found"
-        print(f"✅ Louis template type: {MLLMTemplateType.louis}")
+        assert hasattr(MLLMTemplateType, 'fastvlm'), "FastVLM template type not found"
+        print(f"✅ FastVLM template type: {MLLMTemplateType.fastvlm}")
         
-        print("✅ All Louis constants are properly defined!")
+        print("✅ All FastVLM constants are properly defined!")
         return True
         
     except Exception as e:
@@ -89,9 +89,9 @@ def test_fastvit_encoder():
         traceback.print_exc()
         return False
 
-def simulate_louis_inference():
-    """Simulate Louis model inference (without actually loading the model)"""
-    print("\n🔍 Simulating Louis model inference...")
+def simulate_fastvlm_inference():
+    """Simulate FastVLM model inference (without actually loading the model)"""
+    print("\n🔍 Simulating FastVLM model inference...")
     
     try:
         # This simulates what would happen during inference
@@ -101,30 +101,30 @@ def simulate_louis_inference():
         print("   ↳ Applying adaptive pooling and feature enhancement")
         
         print("\n🧠 Processing with Phi4 language model...")
-        print("   ↳ Encoding text prompt with Louis template")
+        print("   ↳ Encoding text prompt with FastVLM template")
         print("   ↳ Combining vision features with text tokens")
         print("   ↳ Generating response with Phi4")
         
-        print("\n💬 Louis response (simulated):")
+        print("\n💬 FastVLM response (simulated):")
         print("   'I can see an image that has been efficiently processed")
         print("   through my FastViTHD vision encoder. The hybrid token")
         print("   approach allows me to understand high-resolution images")
         print("   while maintaining fast inference speed.'")
         
-        print("\n✅ Louis inference simulation completed!")
+        print("\n✅ FastVLM inference simulation completed!")
         return True
         
     except Exception as e:
         print(f"❌ Error in simulation: {e}")
         return False
 
-def show_louis_architecture():
-    """Show Louis model architecture overview"""
-    print("\n🏗️  Louis Model Architecture Overview")
+def show_fastvlm_architecture():
+    """Show FastVLM model architecture overview"""
+    print("\n🏗️  FastVLM Model Architecture Overview")
     print("=" * 50)
     
     architecture = """
-    Louis Model Pipeline:
+    FastVLM Model Pipeline:
     
     📸 Input: Image/Video
            ↓
@@ -155,7 +155,7 @@ def show_louis_architecture():
     print(architecture)
 
 def main():
-    parser = argparse.ArgumentParser(description='Louis Model Usage Example')
+    parser = argparse.ArgumentParser(description='FastVLM Model Usage Example')
     parser.add_argument('--image_path', type=str, help='Path to input image')
     parser.add_argument('--video_path', type=str, help='Path to input video')
     parser.add_argument('--prompt', type=str, default='Describe what you see in this image.', 
@@ -163,17 +163,17 @@ def main():
     
     args = parser.parse_args()
     
-    print("🚀 Louis Model Example")
+    print("🚀 FastVLM Model Example")
     print("=" * 30)
     
     # Show architecture overview
-    show_louis_architecture()
+    show_fastvlm_architecture()
     
     # Run tests
     success = True
     
     # Test constants
-    if not test_louis_constants():
+    if not test_fastvlm_constants():
         success = False
     
     # Test FastViTHD encoder
@@ -181,15 +181,15 @@ def main():
         success = False
     
     # Simulate inference
-    if not simulate_louis_inference():
+    if not simulate_fastvlm_inference():
         success = False
     
     # Final status
     print("\n" + "=" * 50)
     if success:
-        print("✅ All tests passed! Louis model implementation is working.")
+        print("✅ All tests passed! FastVLM model implementation is working.")
         print("\n📝 Next Steps:")
-        print("   1. Train Louis model with FastViTHD + Phi4")
+        print("   1. Train FastVLM model with FastViTHD + Phi4")
         print("   2. Add real model checkpoints") 
         print("   3. Implement video processing pipeline")
         print("   4. Add benchmarking against other VLMs")
@@ -200,10 +200,10 @@ def main():
     # Show usage examples
     print("\n🔧 Usage Examples:")
     print("   # Image understanding")
-    print("   louis_example.py --image_path image.jpg --prompt 'What objects do you see?'")
+    print("   fastvlm_example.py --image_path image.jpg --prompt 'What objects do you see?'")
     print("   ")
     print("   # Video analysis")  
-    print("   louis_example.py --video_path video.mp4 --prompt 'Describe the action in this video.'")
+    print("   fastvlm_example.py --video_path video.mp4 --prompt 'Describe the action in this video.'")
     
     return 0
 
