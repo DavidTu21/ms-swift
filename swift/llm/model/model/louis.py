@@ -1,5 +1,5 @@
 # Copyright (c) Alibaba, Inc. and its affiliates.
-"""FastVLM Model: FastViTHD Vision Encoder + Phi4 LLM"""
+"""Louis Model: FastViTHD Vision Encoder + Phi4 LLM"""
 
 import os
 import sys
@@ -13,12 +13,12 @@ from ..register import (Model, ModelGroup, ModelMeta, get_model_tokenizer_multim
 from ..utils import ModelInfo
 
 
-def get_model_tokenizer_fastvlm(model_dir: str,
+def get_model_tokenizer_louis(model_dir: str,
                              model_info: ModelInfo,
                              model_kwargs: Dict[str, Any],
                              load_model: bool = True,
                              **kwargs):
-    """Get FastVLM model and tokenizer"""
+    """Get Louis model and tokenizer"""
     from transformers import AutoConfig, AutoTokenizer
     from ..multimodal_encoder.fastvit_hd_encoder import FastViTHDVisionTower
     
@@ -28,8 +28,8 @@ def get_model_tokenizer_fastvlm(model_dir: str,
     # Set up vision tower configuration
     vision_tower_path = kwargs.get('vision_tower_path', 'openai/clip-vit-large-patch14-336')
     
-    # Mock a simple FastVLM configuration for now
-    class FastVLMConfig:
+    # Mock a simple Louis configuration for now
+    class LouisConfig:
         def __init__(self):
             self.mm_vision_tower = vision_tower_path
             self.mm_vision_select_layer = -1
@@ -51,18 +51,18 @@ def get_model_tokenizer_fastvlm(model_dir: str,
 
 register_model(
     ModelMeta(
-        MLLMModelType.fastvlm,
+        MLLMModelType.louis,
         [
             ModelGroup([
                 # For now, we'll use existing models as placeholders
-                # In a real implementation, these would be trained FastVLM models
+                # In a real implementation, these would be trained Louis models
                 Model('microsoft/phi-4', 'microsoft/phi-4'),  # Base Phi4 model
             ]),
         ],
-        TemplateType.fastvlm,
-        get_model_tokenizer_fastvlm,
-        architectures=['Phi3ForCausalLM'],  # Will be enhanced to FastVLMForCausalLM
-        model_arch=ModelArch.fastvlm,
+        TemplateType.louis,
+        get_model_tokenizer_louis,
+        architectures=['Phi3ForCausalLM'],  # Will be enhanced to LouisForCausalLM
+        model_arch=ModelArch.louis,
         requires=['transformers>=4.36'],
         tags=['vision', 'video'],
     ))

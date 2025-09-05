@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-FastVLM Model Validation Script
+Louis Model Validation Script
 ============================
 
-This script validates that the FastVLM model implementation is properly integrated
+This script validates that the Louis model implementation is properly integrated
 with the ms-swift framework.
 """
 
@@ -15,8 +15,8 @@ project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
 def validate_constants():
-    """Validate that FastVLM constants are properly defined"""
-    print("📋 Validating FastVLM constants...")
+    """Validate that Louis constants are properly defined"""
+    print("📋 Validating Louis constants...")
     
     try:
         # Import and check model constants
@@ -28,9 +28,9 @@ def validate_constants():
         
         MLLMModelType = constants_context['MLLMModelType']
         
-        # Check that fastvlm is in the model types
-        assert hasattr(MLLMModelType, 'fastvlm'), "❌ FastVLM model type not found"
-        assert MLLMModelType.fastvlm == 'fastvlm', f"❌ Wrong value: {MLLMModelType.fastvlm}"
+        # Check that louis is in the model types
+        assert hasattr(MLLMModelType, 'louis'), "❌ Louis model type not found"
+        assert MLLMModelType.louis == 'louis', f"❌ Wrong value: {MLLMModelType.louis}"
         
         # Import and check template constants  
         template_context = {'List': List}
@@ -39,12 +39,12 @@ def validate_constants():
             
         MLLMTemplateType = template_context['MLLMTemplateType']
         
-        # Check that fastvlm is in the template types
-        assert hasattr(MLLMTemplateType, 'fastvlm'), "❌ FastVLM template type not found"
-        assert MLLMTemplateType.fastvlm == 'fastvlm', f"❌ Wrong value: {MLLMTemplateType.fastvlm}"
+        # Check that louis is in the template types
+        assert hasattr(MLLMTemplateType, 'louis'), "❌ Louis template type not found"
+        assert MLLMTemplateType.louis == 'louis', f"❌ Wrong value: {MLLMTemplateType.louis}"
         
-        print("   ✅ MLLMModelType.fastvlm =", MLLMModelType.fastvlm)
-        print("   ✅ MLLMTemplateType.fastvlm =", MLLMTemplateType.fastvlm)
+        print("   ✅ MLLMModelType.louis =", MLLMModelType.louis)
+        print("   ✅ MLLMTemplateType.louis =", MLLMTemplateType.louis)
         
         return True
         
@@ -61,18 +61,18 @@ def validate_model_architecture():
         with open('swift/llm/model/model_arch.py') as f:
             content = f.read()
             
-        # Check that FastVLM architecture is mentioned
-        if 'fastvlm' in content.lower():
-            print("   ✅ FastVLM architecture found in model_arch.py")
+        # Check that Louis architecture is mentioned
+        if 'louis' in content.lower():
+            print("   ✅ Louis architecture found in model_arch.py")
         else:
-            print("   ❌ FastVLM architecture not found in model_arch.py")
+            print("   ❌ Louis architecture not found in model_arch.py")
             return False
             
-        # Check that the architecture mapping includes FastVLM
-        if 'MLLMModelArch.fastvlm' in content:
-            print("   ✅ FastVLM architecture mapping found")
+        # Check that the architecture mapping includes Louis
+        if 'MLLMModelArch.louis' in content:
+            print("   ✅ Louis architecture mapping found")
         else:
-            print("   ❌ FastVLM architecture mapping not found") 
+            print("   ❌ Louis architecture mapping not found") 
             return False
             
         return True
@@ -82,27 +82,27 @@ def validate_model_architecture():
         return False
 
 def validate_model_file():
-    """Validate FastVLM model implementation file"""
-    print("\n📁 Validating FastVLM model file...")
+    """Validate Louis model implementation file"""
+    print("\n📁 Validating Louis model file...")
     
     try:
         # Check that the model file exists
-        model_file = Path('swift/llm/model/model/fastvlm.py')
+        model_file = Path('swift/llm/model/model/louis.py')
         if not model_file.exists():
-            print("   ❌ FastVLM model file not found")
+            print("   ❌ Louis model file not found")
             return False
             
-        print("   ✅ FastVLM model file exists")
+        print("   ✅ Louis model file exists")
         
         # Check content
         with open(model_file) as f:
             content = f.read()
             
         required_elements = [
-            'get_model_tokenizer_fastvlm',
-            'MLLMModelType.fastvlm',
-            'TemplateType.fastvlm',
-            'ModelArch.fastvlm',
+            'get_model_tokenizer_louis',
+            'MLLMModelType.louis',
+            'TemplateType.louis',
+            'ModelArch.louis',
             'register_model'
         ]
         
@@ -158,25 +158,25 @@ def validate_vision_encoder():
         return False
 
 def validate_template():
-    """Validate FastVLM template"""
-    print("\n📝 Validating FastVLM template...")
+    """Validate Louis template"""
+    print("\n📝 Validating Louis template...")
     
     try:
         # Check that the template file exists
-        template_file = Path('swift/llm/template/template/fastvlm.py')
+        template_file = Path('swift/llm/template/template/louis.py')
         if not template_file.exists():
-            print("   ❌ FastVLM template file not found")
+            print("   ❌ Louis template file not found")
             return False
             
-        print("   ✅ FastVLM template file exists")
+        print("   ✅ Louis template file exists")
         
         # Check content
         with open(template_file) as f:
             content = f.read()
             
         required_elements = [
-            'FastVLMTemplate',
-            'FastVLMTemplateMeta',
+            'LouisTemplate',
+            'LouisTemplateMeta',
             'placeholder_tokens',
             'replace_tag',
             'register_template'
@@ -204,20 +204,20 @@ def validate_imports():
         with open('swift/llm/model/model/__init__.py') as f:
             model_init = f.read()
             
-        if 'fastvlm' in model_init:
-            print("   ✅ FastVLM imported in model/__init__.py")
+        if 'louis' in model_init:
+            print("   ✅ Louis imported in model/__init__.py")
         else:
-            print("   ❌ FastVLM not imported in model/__init__.py")
+            print("   ❌ Louis not imported in model/__init__.py")
             return False
             
         # Check template __init__.py
         with open('swift/llm/template/template/__init__.py') as f:
             template_init = f.read()
             
-        if 'fastvlm' in template_init:
-            print("   ✅ FastVLM imported in template/__init__.py")
+        if 'louis' in template_init:
+            print("   ✅ Louis imported in template/__init__.py")
         else:
-            print("   ❌ FastVLM not imported in template/__init__.py") 
+            print("   ❌ Louis not imported in template/__init__.py") 
             return False
             
         return True
@@ -228,7 +228,7 @@ def validate_imports():
 
 def main():
     """Run all validation checks"""
-    print("🔍 FastVLM Model Implementation Validation")
+    print("🔍 Louis Model Implementation Validation")
     print("=" * 45)
     
     all_passed = True
@@ -251,7 +251,7 @@ def main():
     print("\n" + "=" * 45)
     if all_passed:
         print("🎉 All validation checks passed!")
-        print("\nFastVLM model implementation is ready for use:")
+        print("\nLouis model implementation is ready for use:")
         print("• FastViTHD vision encoder ✅")
         print("• Phi4 language model integration ✅")
         print("• Model registration ✅")
@@ -266,7 +266,7 @@ def main():
         return 0
     else:
         print("❌ Some validation checks failed!")
-        print("Please fix the issues before using the FastVLM model.")
+        print("Please fix the issues before using the Louis model.")
         return 1
 
 if __name__ == '__main__':

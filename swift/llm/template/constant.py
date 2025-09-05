@@ -184,7 +184,7 @@ class MLLMTemplateType:
     paligemma = 'paligemma'
     phi3_vision = 'phi3_vision'
     phi4_multimodal = 'phi4_multimodal'
-    fastvlm = 'fastvlm'
+    louis = 'louis'
     florence = 'florence'
     molmo = 'molmo'
     megrez_omni = 'megrez_omni'

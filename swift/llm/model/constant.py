@@ -224,7 +224,7 @@ class MLLMModelType:
 
     phi3_vision = 'phi3_vision'
     phi4_multimodal = 'phi4_multimodal'
-    fastvlm = 'fastvlm'
+    louis = 'louis'
     florence = 'florence'
     idefics3 = 'idefics3'
     paligemma = 'paligemma'

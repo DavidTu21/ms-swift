@@ -1,5 +1,5 @@
 # Copyright (c) Alibaba, Inc. and its affiliates.
-"""FastVLM Template: FastViTHD + Phi4 multimodal template"""
+"""Louis Template: FastViTHD + Phi4 multimodal template"""
 
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Literal, Optional
@@ -14,8 +14,8 @@ from ..utils import Context, Prompt, findall
 from .utils import ChatmlTemplateMeta
 
 
-class FastVLMTemplate(Template):
-    """FastVLM multimodal template supporting images and videos"""
+class LouisTemplate(Template):
+    """Louis multimodal template supporting images and videos"""
     placeholder_tokens = ['<image>', '<video>']
 
     @property
@@ -54,21 +54,21 @@ class FastVLMTemplate(Template):
         images = inputs.images
         if images:
             # This would integrate with FastViTHD vision encoder
-            # For now, use a placeholder that indicates FastVLM processing
+            # For now, use a placeholder that indicates Louis processing
             image_processor = getattr(self.processor, 'image_processor', None)
             if image_processor is not None:
                 # Process images with FastViTHD optimizations
                 image_inputs = image_processor(images, return_tensors='pt').to(self.model_info.torch_dtype)
                 encoded['pixel_values'] = image_inputs['pixel_values']
                 
-                # Add FastVLM-specific enhancements
+                # Add Louis-specific enhancements
                 if 'image_sizes' in image_inputs:
                     encoded['image_sizes'] = image_inputs['image_sizes']
                     
         # Handle videos (basic support)
         videos = inputs.videos
         if videos:
-            # FastVLM supports video through frame sampling and FastViTHD
+            # Louis supports video through frame sampling and FastViTHD
             # For now, treat videos as sequences of images
             video_processor = getattr(self.processor, 'video_processor', None)
             if video_processor is not None:
@@ -83,7 +83,7 @@ class FastVLMTemplate(Template):
         # Handle image data in batch
         pixel_values = [b['pixel_values'] for b in batch if 'pixel_values' in b]
         if pixel_values:
-            # Stack with FastVLM FastViTHD optimizations
+            # Stack with Louis FastViTHD optimizations
             res['pixel_values'] = torch.stack(pixel_values)
             
         # Handle video data in batch  
@@ -95,19 +95,19 @@ class FastVLMTemplate(Template):
 
 
 @dataclass
-class FastVLMTemplateMeta(TemplateMeta):
+class LouisTemplateMeta(TemplateMeta):
     prefix: Prompt = field(default_factory=lambda: ['<|im_start|>system\n{{SYSTEM}}<|im_end|>\n'])
     prompt: Prompt = field(default_factory=lambda: ['<|im_start|>user\n{{QUERY}}<|im_end|>\n<|im_start|>assistant\n'])
     chat_sep: Optional[Prompt] = field(default_factory=lambda: ['<|im_end|>\n'])
     suffix: Prompt = field(default_factory=lambda: ['<|im_end|>'])
     default_system: Optional[str] = field(default_factory=lambda: 
-        'You are FastVLM, an advanced multimodal AI assistant powered by FastViTHD vision encoding and Phi4 language modeling. '
+        'You are Louis, an advanced multimodal AI assistant powered by FastViTHD vision encoding and Phi4 language modeling. '
         'You excel at understanding images and videos with exceptional speed and accuracy.')
 
 
 register_template(
-    FastVLMTemplateMeta(
-        MLLMTemplateType.fastvlm,
-        template_cls=FastVLMTemplate,
+    LouisTemplateMeta(
+        MLLMTemplateType.louis,
+        template_cls=LouisTemplate,
         auto_add_bos=True,
     ))
