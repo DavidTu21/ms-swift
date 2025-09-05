@@ -1,6 +1,6 @@
-# Louis Model: FastViTHD + Phi4 Multimodal Architecture
+# FastVLM Model: FastViTHD + Phi4 Multimodal Architecture
 
-Louis is a cutting-edge multimodal AI model that combines Apple's FastViTHD vision encoder with Microsoft's Phi4 language model, integrated into the ms-swift framework. This implementation provides exceptionally fast image and video understanding capabilities.
+FastVLM is a cutting-edge multimodal AI model that combines Apple's FastViTHD vision encoder with Microsoft's Phi4 language model, integrated into the ms-swift framework. This implementation provides exceptionally fast image and video understanding capabilities.
 
 ## 🚀 Key Features
 
@@ -32,7 +32,7 @@ Louis is a cutting-edge multimodal AI model that combines Apple's FastViTHD visi
 
 ## 🛠️ Installation
 
-1. **Install ms-swift with Louis support:**
+1. **Install ms-swift with FastVLM support:**
 ```bash
 git clone https://github.com/DavidTu21/ms-swift.git
 cd ms-swift
@@ -54,8 +54,8 @@ from swift.utils import seed_everything
 import torch
 
 # Set up the model
-model_type = 'louis'
-template_type = 'louis' 
+model_type = 'fastvlm'
+template_type = 'fastvlm' 
 
 # Load model and tokenizer (when available)
 model, tokenizer = get_model_tokenizer(model_type, torch_dtype=torch.bfloat16)
@@ -65,7 +65,7 @@ template = get_template(template_type, tokenizer)
 # Process image
 query = 'Describe what you see in this image.'
 response, history = inference(model, template, query, images=['path/to/image.jpg'])
-print(f'Louis: {response}')
+print(f'FastVLM: {response}')
 ```
 
 ### Video Analysis
@@ -74,20 +74,20 @@ print(f'Louis: {response}')
 # Video understanding
 query = 'What action is happening in this video?'
 response, history = inference(model, template, query, videos=['path/to/video.mp4'])
-print(f'Louis: {response}')
+print(f'FastVLM: {response}')
 ```
 
 ### Command Line Usage
 
 ```bash
 # Test the implementation
-python examples/louis_example.py
+python examples/fastvlm_example.py
 
 # With specific image
-python examples/louis_example.py --image_path image.jpg --prompt "What objects do you see?"
+python examples/fastvlm_example.py --image_path image.jpg --prompt "What objects do you see?"
 
 # With video
-python examples/louis_example.py --video_path video.mp4 --prompt "Describe the action."
+python examples/fastvlm_example.py --video_path video.mp4 --prompt "Describe the action."
 ```
 
 ## 🏗️ Technical Implementation
@@ -114,7 +114,7 @@ self.feature_enhancer = nn.Sequential(
 
 ### Phi4 Integration
 
-Louis leverages Phi4's capabilities:
+FastVLM leverages Phi4's capabilities:
 
 - **Efficient Architecture**: Optimized for inference speed
 - **Strong Reasoning**: Advanced language understanding
@@ -122,10 +122,10 @@ Louis leverages Phi4's capabilities:
 
 ### Template System
 
-Louis uses a specialized template:
+FastVLM uses a specialized template:
 
 ```python
-system_message = """You are Louis, an advanced multimodal AI assistant powered by 
+system_message = """You are FastVLM, an advanced multimodal AI assistant powered by 
 FastViTHD vision encoding and Phi4 language modeling. You excel at understanding 
 images and videos with exceptional speed and accuracy."""
 ```
@@ -134,7 +134,7 @@ images and videos with exceptional speed and accuracy."""
 
 | Model | TTFT Speedup | Vision Encoder Size | Accuracy |
 |-------|-------------|-------------------|----------|
-| Louis | **85x faster** | **3.4x smaller** | Maintained |
+| FastVLM | **85x faster** | **3.4x smaller** | Maintained |
 | LLaVA-OneVision | 1x | 1x | Baseline |
 
 *TTFT = Time-to-First-Token
@@ -150,17 +150,17 @@ images and videos with exceptional speed and accuracy."""
 
 ### Files Added/Modified:
 
-1. **Model Registration**: `swift/llm/model/model/louis.py`
+1. **Model Registration**: `swift/llm/model/model/fastvlm.py`
 2. **Vision Encoder**: `swift/llm/model/multimodal_encoder/fastvit_hd_encoder.py`
-3. **Template**: `swift/llm/template/template/louis.py`
-4. **Constants**: Added Louis constants to model and template constant files
-5. **Architecture**: Registered Louis architecture mappings
+3. **Template**: `swift/llm/template/template/fastvlm.py`
+4. **Constants**: Added FastVLM constants to model and template constant files
+5. **Architecture**: Registered FastVLM architecture mappings
 
 ### Key Classes:
 
 - `FastViTHDVisionTower`: Efficient vision encoder with token reduction
-- `LouisTemplate`: Multimodal template supporting images and videos
-- `LouisConfig`: Configuration for model parameters
+- `FastVLMTemplate`: Multimodal template supporting images and videos
+- `FastVLMConfig`: Configuration for model parameters
 
 ## 🚧 Development Status
 
@@ -168,13 +168,13 @@ images and videos with exceptional speed and accuracy."""
 
 - [x] FastViTHD vision encoder implementation
 - [x] Phi4 integration architecture  
-- [x] Louis template and constants
+- [x] FastVLM template and constants
 - [x] Model registration and architecture mapping
 - [x] Example usage and documentation
 
 **Next Steps**:
 
-- [ ] Train Louis model with FastViTHD + Phi4 checkpoints
+- [ ] Train FastVLM model with FastViTHD + Phi4 checkpoints
 - [ ] Add pre-trained model weights
 - [ ] Implement advanced video processing
 - [ ] Add comprehensive benchmarking
@@ -202,4 +202,4 @@ This implementation follows the same license as the ms-swift framework. Please c
 
 ---
 
-*Louis Model - Bringing FastViTHD efficiency to multimodal AI* 🚀
+*FastVLM Model - Bringing FastViTHD efficiency to multimodal AI* 🚀
